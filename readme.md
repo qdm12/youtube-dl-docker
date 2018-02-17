@@ -1,8 +1,8 @@
 # Docker Youtube-DL
 
-Download with [**youtube-dl**](https://github.com/rg3/youtube-dl) using command line arguments or configuration files. IP address detection built on top if you use a VPN.
+Download with [**youtube-dl**](https://github.com/rg3/youtube-dl) using command line arguments or configuration files. GeoIP built on top if you use a VPN.
 
-[![Docker Youtube-DL](readme/title.png)](https://www.github.com/qmcgaw/youtube-dl-docker)
+[![Docker Youtube-DL](readme/title.png)](https://hub.docker.com/r/qmcgaw/youtube-dl-alpine/)
 
 This image is based on the lightweight Alpine Linux with the following:
 - Bash *to check for regular expressions*
