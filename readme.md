@@ -21,8 +21,7 @@ This image is based on the lightweight Alpine Linux with the following:
         - Note that the files will be output to `mydownloads` (see [script.sh](https://github.com/qdm12/youtube-dl-docker/blob/master/script.sh))
 1. Make sure you have [Docker](https://docs.docker.com/install/) installed
 1. Obtaining the Docker image
-    - Option 1 of 2: Docker Hub Registry
-        - Simply go to [Running](#Running) the container
+    - Option 1 of 2: Automated download from Docker Hub Registry, simply go to [Running](#Running) the container
     - Option 2 of 2: Build the image
         1. Download the repository files or `git clone` them
         1. With a terminal, go in the directory where the *Dockerfile* is located
@@ -39,7 +38,8 @@ This image is based on the lightweight Alpine Linux with the following:
 1. Launching the Docker container from the image (replace the environment variables below with your own values):
 
     ```bash
-    sudo docker run -d --name=youtubedl -v /mypathto/mydownloads:/downloads -v /mypathto/youtube-dl.conf:/etc/youtube-dl.conf  qmcgaw/youtube-dl-alpine
+    sudo docker run -d --name=youtubedl -v /mypathto/mydownloads:/downloads \
+    -v /mypathto/youtube-dl.conf:/etc/youtube-dl.conf  qmcgaw/youtube-dl-alpine
     ```
 
 1. Notes
@@ -51,7 +51,9 @@ This image is based on the lightweight Alpine Linux with the following:
 1. Launching the Docker container from the image (replace the environment variables below with your own values):
 
     ```bash
-    sudo docker run -d --name=youtubedl -v /mypathto/mydownloads:/downloads  qmcgaw/youtube-dl-alpine --ignore-errors --restrict-filenames -a "/downloads/list.txt"
+    sudo docker run -d --name=youtubedl -v /mypathto/mydownloads:/downloads  \
+    qmcgaw/youtube-dl-alpine --ignore-errors --restrict-filenames \
+    -a "/downloads/list.txt"
     ```
 
 1. Notes
@@ -70,5 +72,6 @@ The starting script of the container will check if the IP address match this cou
 You could use the command similarly to the following:
 
 ```bash
-sudo docker run -d --rm --name=youtubedl --net=container:myvpn -e VPNCOUNTRY=UK -v '/pathto/mydownloads:/downloads' ydl
+sudo docker run -d --rm --name=youtubedl --net=container:myvpn \
+-e VPNCOUNTRY=UK -v '/pathto/mydownloads:/downloads' ydl
 ```
