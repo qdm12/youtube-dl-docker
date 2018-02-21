@@ -2,7 +2,7 @@
 
 Download with [**youtube-dl**](https://github.com/rg3/youtube-dl) using command line arguments or configuration files. GeoIP built on top if you use a VPN.
 
-[![Docker Youtube-DL](readme/title.png)](https://hub.docker.com/r/qmcgaw/youtube-dl-alpine/)
+[![Docker Youtube-DL](https://github.com/qdm12/youtube-dl-docker/raw/master/readme/title.png)](https://hub.docker.com/r/qmcgaw/youtube-dl-alpine/)
 
 This image is based on the lightweight Alpine Linux with the following:
 - Bash *to check for regular expressions*
@@ -13,12 +13,12 @@ This image is based on the lightweight Alpine Linux with the following:
 
 ## Installation
 
-[![Docker container](readme/docker.png)](https://www.docker.com/)
+[![Docker container](https://github.com/qdm12/youtube-dl-docker/raw/master/readme/docker.png)](https://www.docker.com/)
 
 1. On your host machine, create the following:
     - The output directory `mydownloads`
     - If you want to use the youtube-dl configuration file, `youtube-dl.conf` (see [this](https://github.com/rg3/youtube-dl/blob/master/README.md#configuration) for more information)
-        - Note that the files will be output to `mydownloads` (see [script.sh](script.sh))
+        - Note that the files will be output to `mydownloads` (see [script.sh](https://github.com/qdm12/youtube-dl-docker/blob/master/script.sh))
 1. Make sure you have [Docker](https://docs.docker.com/install/) installed
 1. Obtaining the Docker image
     - Option 1 of 2: Docker Hub Registry
@@ -43,8 +43,8 @@ This image is based on the lightweight Alpine Linux with the following:
     ```
 
 1. Notes
-    - The mount `/mypathto/mydownloads:/downloads` is compulsory if you want to access the downloaded files from the host
-    - The mount `/mypathto/youtube-dl.conf:/etc/youtube-dl.conf` is compulsory **if** you don't use any command lines arguments
+    - The mount `/mypathto/mydownloads:/downloads` is required.
+    - The mount `/mypathto/youtube-dl.conf:/etc/youtube-dl.conf` is compulsory **if** you don't use any command lines arguments.
 
 ### With command line arguments
 
@@ -55,7 +55,7 @@ This image is based on the lightweight Alpine Linux with the following:
     ```
 
 1. Notes
-    - The mount `/mypathto/mydownloads:/downloads` is compulsory if you want to access the downloaded files from the host
+    - The mount `/mypathto/mydownloads:/downloads` is required.
     - You can pass youtube-dl arguments at the end of the docker command. See [this](https://github.com/rg3/youtube-dl/blob/master/README.md#options) to see all possible options.
 
 ### VPN and IP address check
