@@ -4,6 +4,8 @@ Download with [**youtube-dl**](https://github.com/rg3/youtube-dl) using command 
 
 [![Docker Youtube-DL](readme/title.png)](https://hub.docker.com/r/qmcgaw/youtube-dl-alpine/)
 
+[![Build Status](https://travis-ci.org/qdm12/youtube-dl-docker.svg?branch=master)](https://travis-ci.org/qdm12/youtube-dl-docker)
+
 This image is based on the lightweight Alpine Linux with the following:
 - Bash *to check for regular expressions*
 - Python *to run Youtube-DL*
