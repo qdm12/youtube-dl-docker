@@ -1,0 +1,11 @@
+version: '3'
+services:
+    youtube-dl:
+        image: qmcgaw/youtube-dl-alpine
+        container_name: youtube-dl
+        network_mode: bridge
+        volumes:
+            - /yourpath/downloads:/downloads
+            - /yourpath/youtube-dl.conf:/etc/youtube-dl.conf:ro
+        environment:
+            - VPNCOUNTRY=UK
