@@ -1,9 +1,7 @@
 language: generic
-sudo: required
-dist: trusty
-
 services:
   - docker
-
 install:
   - docker build .
+after_script:
+  - "curl -X POST https://hooks.microbadger.com/images/qmcgaw/youtube-dl-alpine/250AkcgGBWzkhav_KweCKV2NYu4="

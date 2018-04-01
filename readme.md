@@ -6,6 +6,13 @@ Download with [**youtube-dl**](https://github.com/rg3/youtube-dl) using command 
 
 [![Build Status](https://travis-ci.org/qdm12/youtube-dl-docker.svg?branch=master)](https://travis-ci.org/qdm12/youtube-dl-docker)
 
+[![](https://images.microbadger.com/badges/image/qmcgaw/youtube-dl-alpine.svg)](https://microbadger.com/images/qmcgaw/youtube-dl-alpine)
+[![](https://images.microbadger.com/badges/version/qmcgaw/youtube-dl-alpine.svg)](https://microbadger.com/images/qmcgaw/youtube-dl-alpine)
+
+| Download size | Image size | RAM usage | CPU usage |
+| --- | --- | --- | --- |
+| 33.9MB | 93.9MB | Depends | Depends |
+
 This image is based on the lightweight Alpine Linux with the following:
 - Bash *to check for regular expressions*
 - Python *to run Youtube-DL*
@@ -21,46 +28,31 @@ This image is based on the lightweight Alpine Linux with the following:
     - The output directory `mydownloads`
     - If you want to use the youtube-dl configuration file, `youtube-dl.conf` (see [this](https://github.com/rg3/youtube-dl/blob/master/README.md#configuration) for more information)
         - Note that the files will be output to `mydownloads` (see [script.sh](https://github.com/qdm12/youtube-dl-docker/blob/master/script.sh))
-1. Make sure you have [Docker](https://docs.docker.com/install/) installed
-1. Obtaining the Docker image
-    - Option 1 of 2: Automated download from Docker Hub Registry, simply go to [Running](#Running) the container
-    - Option 2 of 2: Build the image
-        1. Download the repository files or `git clone` them
-        1. With a terminal, go in the directory where the *Dockerfile* is located
-        1. Build the image with:
-
-            ```bash
-            sudo docker build -t qmcgaw/youtube-dl-alpine ./
-            ```
-
-## Running
 
 ### With configuration files
 
-1. Launching the Docker container from the image (replace the environment variables below with your own values):
+Launch the Docker container from the image (replace the environment variables below with your own values):
 
-    ```bash
-    sudo docker run -d --name=youtubedl -v /mypathto/mydownloads:/downloads \
-    -v /mypathto/youtube-dl.conf:/etc/youtube-dl.conf  qmcgaw/youtube-dl-alpine
-    ```
+```bash
+sudo docker run -d --name=youtubedl -v /mypathto/mydownloads:/downloads \
+-v /mypathto/youtube-dl.conf:/etc/youtube-dl.conf  qmcgaw/youtube-dl-alpine
+```
 
-1. Notes
-    - The mount `/mypathto/mydownloads:/downloads` is required.
-    - The mount `/mypathto/youtube-dl.conf:/etc/youtube-dl.conf` is compulsory **if** you don't use any command lines arguments.
+- The mount `/mypathto/mydownloads:/downloads` is required.
+- The mount `/mypathto/youtube-dl.conf:/etc/youtube-dl.conf` is compulsory **if** you don't use any command lines arguments.
 
 ### With command line arguments
 
-1. Launching the Docker container from the image (replace the environment variables below with your own values):
+Launch the Docker container from the image (replace the environment variables below with your own values):
 
-    ```bash
-    sudo docker run -d --name=youtubedl -v /mypathto/mydownloads:/downloads  \
-    qmcgaw/youtube-dl-alpine --ignore-errors --restrict-filenames \
-    -a "/downloads/list.txt"
-    ```
+```bash
+sudo docker run -d --name=youtubedl -v /mypathto/mydownloads:/downloads  \
+qmcgaw/youtube-dl-alpine --ignore-errors --restrict-filenames \
+-a "/downloads/list.txt"
+```
 
-1. Notes
-    - The mount `/mypathto/mydownloads:/downloads` is required.
-    - You can pass youtube-dl arguments at the end of the docker command. See [this](https://github.com/rg3/youtube-dl/blob/master/README.md#options) to see all possible options.
+- The mount `/mypathto/mydownloads:/downloads` is required.
+- You can pass youtube-dl arguments at the end of the docker command. See [this](https://github.com/rg3/youtube-dl/blob/master/README.md#options) to see all possible options.
 
 ### VPN and IP address check
 
