@@ -5,9 +5,11 @@ Download with [**youtube-dl**](https://github.com/rg3/youtube-dl) using command 
 [![Docker Youtube-DL](https://github.com/qdm12/youtube-dl-docker/raw/master/readme/title.png)](https://hub.docker.com/r/qmcgaw/youtube-dl-alpine/)
 
 Youtube-dl build (external):
+
 [![Build Status](https://travis-ci.org/rg3/youtube-dl.svg?branch=master)](https://travis-ci.org/rg3/youtube-dl)
 
 Docker build:
+
 [![Build Status](https://travis-ci.org/qdm12/youtube-dl-docker.svg?branch=master)](https://travis-ci.org/qdm12/youtube-dl-docker)
 [![Docker Build Status](https://img.shields.io/docker/build/qmcgaw/youtube-dl-alpine.svg)](https://hub.docker.com/r/qmcgaw/youtube-dl-alpine)
 
@@ -24,7 +26,7 @@ Docker build:
 
 | Download size | Image size | RAM usage | CPU usage |
 | --- | --- | --- | --- |
-| 30MB | 89MB | Depends | Depends |
+| 30.4MB | 89MB | Depends | Depends |
 
 It is based on:
 - [Alpine 3.7](https://alpinelinux.org)

@@ -1,8 +1,8 @@
 FROM alpine:3.7
 LABEL maintainer="quentin.mcgaw@gmail.com" \
       description="Download with youtube-dl using command line arguments or configuration files. GeoIP built on top if you use a VPN" \
-      download="?MB" \
-      size="?MB" \
+      download="30.4MB" \
+      size="89MB" \
       ram="Depends" \
       cpu_usage="Depends" \
       github="https://github.com/qdm12/youtube-dl-docker"
