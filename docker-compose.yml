@@ -7,5 +7,3 @@ services:
         volumes:
             - /yourpath/downloads:/downloads
             - /yourpath/youtube-dl.conf:/etc/youtube-dl.conf:ro
-        environment:
-            - VPNCOUNTRY=UK
