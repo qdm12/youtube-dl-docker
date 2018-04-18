@@ -6,13 +6,14 @@ LABEL maintainer="quentin.mcgaw@gmail.com" \
       ram="Depends" \
       cpu_usage="Depends" \
       github="https://github.com/qdm12/youtube-dl-docker"
+COPY vpncheck.sh entrypoint.sh /
 RUN apk add -q --progress --update --no-cache ca-certificates ffmpeg python2 && \
     mkdir /downloads && \
-    rm -rf /var/cache/apk/*
+    rm -rf /var/cache/apk/* && \
+    chmod +x /vpncheck.sh /entrypoint.sh
 ENV CITY= \
     ORG=
 VOLUME /downloads
-COPY vpncheck.sh entrypoint.sh /
 HEALTHCHECK --interval=5m --timeout=5s --retries=1 CMD /vpncheck.sh
 ENTRYPOINT /vpncheck.sh && /entrypoint.sh
 CMD [""]
