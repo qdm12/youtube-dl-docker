@@ -14,6 +14,6 @@ RUN apk add -q --progress --update --no-cache ca-certificates ffmpeg python2 && 
 ENV CITY= \
     ORG=
 VOLUME /downloads
-HEALTHCHECK --interval=5m --timeout=5s --retries=1 CMD /vpncheck.sh
+HEALTHCHECK --interval=5m --timeout=10s --retries=2 CMD /vpncheck.sh
 ENTRYPOINT /vpncheck.sh && /entrypoint.sh
 CMD [""]
