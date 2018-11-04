@@ -1,9 +1,11 @@
 version: '3'
 services:
-    youtube-dl:
-        image: qmcgaw/youtube-dl-alpine
-        container_name: youtube-dl
-        network_mode: bridge
-        volumes:
-            - /yourpath/downloads:/downloads
-            - /yourpath/youtube-dl.conf:/etc/youtube-dl.conf:ro
+  youtube-dl:
+    build: .
+    image: qmcgaw/youtube-dl-alpine
+    container_name: youtube-dl
+    network_mode: bridge
+    volumes:
+      - /yourpath/downloads:/downloads
+      #- .youtube-dl.conf:/etc/youtube-dl.conf:ro
+    command: ["https://www.youtube.com/watch?v=HagVnWAeGcM -o "/downloads/%(title)s-%(duration)s.%(ext)s"]
