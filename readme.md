@@ -2,7 +2,7 @@
 
 *Download with [**youtube-dl**](https://github.com/rg3/youtube-dl) using command line arguments or configuration files*
 
-[![Docker Youtube-DL](https://github.com/qdm12/youtube-dl-docker/raw/master/readme/title.png)](https://hub.docker.com/r/qmcgaw/youtube-dl-alpine/)
+[![Docker Youtube-DL](https://github.com/qdm12/youtube-dl-docker/raw/master/title.png)](https://hub.docker.com/r/qmcgaw/youtube-dl-alpine/)
 
 Youtube-dl build (external):
 
