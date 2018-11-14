@@ -19,9 +19,15 @@ YTDL_VERSION=$(wget -qO- https://api.github.com/repos/rg3/youtube-dl/releases/la
 if [ "$YTDL_VERSION_BUILD" != "$YTDL_VERSION" ]; then
   wget -q https://github.com/rg3/youtube-dl/releases/download/$YTDL_VERSION/youtube-dl -O /usr/local/bin/youtube-dl
   wget -q https://github.com/rg3/youtube-dl/releases/download/$YTDL_VERSION/youtube-dl.sig -O /tmp/youtube-dl.sig
-  [ gpg --verify /tmp/youtube-dl.sig /usr/local/bin/youtube-dl ] && (printf "error verifying youtube-dl signature!"; exit 1)
+  if [ gpg --verify /tmp/youtube-dl.sig /usr/local/bin/youtube-dl ]; then
+    printf "error verifying youtube-dl signature!\n"
+    exit 1
+  fi
   SHA256=$(wget -qO- https://github.com/rg3/youtube-dl/releases/download/$YTDL_VERSION/SHA2-256SUMS | head -n 1 | cut -d " " -f 1)
-  [ $(sha256sum /usr/local/bin/youtube-dl | cut -d " " -f 1) != "$SHA256" ] && (printf "error verifying youtube-dl checksum!"; exit 1)
+  if [ $(sha256sum /usr/local/bin/youtube-dl | cut -d " " -f 1) != "$SHA256" ]; then
+    printf "error verifying youtube-dl checksum!\n"
+    exit 1
+  fi
   chmod 700 /usr/local/bin/youtube-dl
 fi
 printf "DONE"
