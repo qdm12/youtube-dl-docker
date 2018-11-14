@@ -8,4 +8,4 @@ services:
     volumes:
       - /yourpath/downloads:/downloads
       #- .youtube-dl.conf:/etc/youtube-dl.conf:ro
-    command: ["https://www.youtube.com/watch?v=HagVnWAeGcM -o "/downloads/%(title)s-%(duration)s.%(ext)s"]
+    command: ["https://www.youtube.com/watch?v=HagVnWAeGcM","-o","/downloads/%(title)s-%(duration)s.%(ext)s"]

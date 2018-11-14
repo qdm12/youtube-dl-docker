@@ -10,7 +10,7 @@ printf "\n == by github.com/qdm12 - Quentin McGaw ==\n\n"
 YTDL_VERSION_BUILD=$(youtube-dl --version)
 PYTHON_VERSION_BUILD=$(python --version 2>&1 | cut -d " " -f 2)
 FFMPEG_VERSION_BUILD=$(ffmpeg -version | head -n 1 | grep -oE 'version [0-9]+\.[0-9]+\.[0-9]+' | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
-GPG_VERSION_BUILD=$(gpg --version | head -n 1 | cut -d " " -f 3)
+#GPG_VERSION_BUILD=$(gpg --version | head -n 1 | cut -d " " -f 3)
 printf "Checking for Alpine packages updates..."
 apk -q --no-cache --update upgrade
 printf "DONE\n"
@@ -18,11 +18,11 @@ printf "Checking for Youtube-DL update..."
 YTDL_VERSION=$(wget -qO- https://api.github.com/repos/rg3/youtube-dl/releases/latest | grep '"tag_name": ' | sed -E 's/.*"([^"]+)".*/\1/')
 if [ "$YTDL_VERSION_BUILD" != "$YTDL_VERSION" ]; then
   wget -q https://github.com/rg3/youtube-dl/releases/download/$YTDL_VERSION/youtube-dl -O /usr/local/bin/youtube-dl
-  wget -q https://github.com/rg3/youtube-dl/releases/download/$YTDL_VERSION/youtube-dl.sig -O /tmp/youtube-dl.sig
-  if [ gpg --verify /tmp/youtube-dl.sig /usr/local/bin/youtube-dl ]; then
-    printf "error verifying youtube-dl signature!\n"
-    exit 1
-  fi
+  #wget -q https://github.com/rg3/youtube-dl/releases/download/$YTDL_VERSION/youtube-dl.sig -O /tmp/youtube-dl.sig
+  #if [ gpg --verify /tmp/youtube-dl.sig /usr/local/bin/youtube-dl ]; then
+  #  printf "error verifying youtube-dl signature!\n"
+  #  exit 1
+  #fi
   SHA256=$(wget -qO- https://github.com/rg3/youtube-dl/releases/download/$YTDL_VERSION/SHA2-256SUMS | head -n 1 | cut -d " " -f 1)
   if [ $(sha256sum /usr/local/bin/youtube-dl | cut -d " " -f 1) != "$SHA256" ]; then
     printf "error verifying youtube-dl checksum!\n"
@@ -34,7 +34,7 @@ printf "DONE"
 YTDL_VERSION=$(youtube-dl --version)
 PYTHON_VERSION=$(python --version 2>&1 | cut -d " " -f 2)
 FFMPEG_VERSION=$(ffmpeg -version | head -n 1 | grep -oE 'version [0-9]+\.[0-9]+\.[0-9]+' | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
-GPG_VERSION=$(gpg --version | head -n 1 | cut -d " " -f 3)
+#GPG_VERSION=$(gpg --version | head -n 1 | cut -d " " -f 3)
 printf "\nYoutube-dl version: $YTDL_VERSION"
 if [ "$YTDL_VERSION" != "$YTDL_VERSION_BUILD" ]; then
   printf " (updated from $YTDL_VERSION_BUILD)"
@@ -48,9 +48,9 @@ if [ "$FFMPEG_VERSION" != "$FFMPEG_VERSION_BUILD" ]; then
   printf " (updated from $FFMPEG_VERSION_BUILD)"
 fi
 printf "\nGPG version: $GPG_VERSION"
-if [ "$GPG_VERSION" != "$GPG_VERSION_BUILD" ]; then
-  printf " (updated from $GPG_VERSION_BUILD)"
-fi
+#if [ "$GPG_VERSION" != "$GPG_VERSION_BUILD" ]; then
+#  printf " (updated from $GPG_VERSION_BUILD)"
+#fi
 # Checking for configuration files if necessary
 if [ "$1" != "" ]; then
   printf "\nUsing arguments: '$@'\n"

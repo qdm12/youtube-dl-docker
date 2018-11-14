@@ -18,13 +18,14 @@ LABEL org.label-schema.schema-version="1.0.0-rc1" \
       ram-usage="Variable" \
       cpu-usage="Variable"
 VOLUME /downloads
-HEALTHCHECK --interval=10m --timeout=10s --retries=1 CMD if [[ "$(nslookup duckduckgo.com 2>nul)" == "" ]]; then echo "Can't resolve duckduckgo.com"; exit 1; fi
-RUN apk add -q --progress --update --no-cache ca-certificates ffmpeg python gnupg && \
-    gpg --keyserver keyserver.ubuntu.com --recv-keys 'ED7F5BF46B3BBED81C87368E2C393E0F18A9236D' && \
+HEALTHCHECK --interval=10m --timeout=10s --retries=1 CMD [ "$(wget -qO- https://duckduckgo.com 2>/dev/null)" != "" ] || exit 1
+RUN apk add -q --progress --update --no-cache ca-certificates wget ffmpeg python && \
+    #gnupg
+    #gpg --keyserver keyserver.ubuntu.com --recv-keys 'ED7F5BF46B3BBED81C87368E2C393E0F18A9236D' && \
     LATEST=$(wget -qO- https://api.github.com/repos/rg3/youtube-dl/releases/latest | grep '"tag_name": ' | sed -E 's/.*"([^"]+)".*/\1/') && \
     wget -q https://github.com/rg3/youtube-dl/releases/download/$LATEST/youtube-dl -O /usr/local/bin/youtube-dl && \
-    wget -q https://github.com/rg3/youtube-dl/releases/download/$LATEST/youtube-dl.sig -O /tmp/youtube-dl.sig && \
-    gpg --verify /tmp/youtube-dl.sig /usr/local/bin/youtube-dl && \
+    #wget -q https://github.com/rg3/youtube-dl/releases/download/$LATEST/youtube-dl.sig -O /tmp/youtube-dl.sig && \
+    #gpg --verify /tmp/youtube-dl.sig /usr/local/bin/youtube-dl && \
     SHA256=$(wget -qO- https://github.com/rg3/youtube-dl/releases/download/$LATEST/SHA2-256SUMS | head -n 1 | cut -d " " -f 1) && \
     [ $(sha256sum /usr/local/bin/youtube-dl | cut -d " " -f 1) = "$SHA256" ] && \
     chmod 700 /usr/local/bin/youtube-dl && \
