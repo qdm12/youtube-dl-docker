@@ -6,6 +6,7 @@ services:
     container_name: youtube-dl
     network_mode: bridge
     volumes:
-      - /yourpath/downloads:/downloads
-      #- .youtube-dl.conf:/etc/youtube-dl.conf:ro
-    command: ["https://www.youtube.com/watch?v=HagVnWAeGcM","-o","/downloads/%(title)s-%(duration)s.%(ext)s"]
+      - ./downloads:/downloads
+    command: |
+      https://www.youtube.com/watch?v=HagVnWAeGcM
+      -o "/downloads/%(title)s-%(duration)s.%(ext)s"

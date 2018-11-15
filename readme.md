@@ -4,12 +4,6 @@
 
 [![Docker Youtube-DL](https://github.com/qdm12/youtube-dl-docker/raw/master/title.png)](https://hub.docker.com/r/qmcgaw/youtube-dl-alpine/)
 
-Youtube-dl build (external):
-
-[![Build Status](https://travis-ci.org/rg3/youtube-dl.svg?branch=master)](https://travis-ci.org/rg3/youtube-dl)
-
-Docker build:
-
 [![Build Status](https://travis-ci.org/qdm12/youtube-dl-docker.svg?branch=master)](https://travis-ci.org/qdm12/youtube-dl-docker)
 [![Docker Build Status](https://img.shields.io/docker/build/qmcgaw/youtube-dl-alpine.svg)](https://hub.docker.com/r/qmcgaw/youtube-dl-alpine)
 
@@ -35,43 +29,63 @@ It is based on:
 - [ffmpeg 3.4.4](https://pkgs.alpinelinux.org/package/v3.8/community/x86_64/ffmpeg)
 - [Ca-Certificates](https://pkgs.alpinelinux.org/package/v3.8/main/x86_64/ca-certificates) for the initial check and healthcheck (through HTTPS)
 - [Python 2.7.15](https://pkgs.alpinelinux.org/package/v3.8/main/x86_64/python)
-- GnuPG 2.2.8
+- [GnuPG 2.2.8](https://pkgs.alpinelinux.org/package/v3.8/main/x86_64/gnupg)
 
 ## Setup
 
-See the [youtube-dl command line options](https://github.com/rg3/youtube-dl/blob/master/README.md#options)
+1. Create a directory `./downloads/` to store the downloads
+1. Run the container with
 
-Use the following command in example:
+    ```bash
+    docker run -d -v ./downloads:/downloads qmcgaw/youtube-dl-alpine https://www.youtube.com/watch?v=HagVnWAeGcM
+    ```
 
+    or use [docker-compose.yml](https://github.com/qdm12/youtube-dl-docker/blob/master/docker-compose.yml) with
 
-```bash
-docker run -d -v /yourpath:/downloads qmcgaw/youtube-dl-alpine https://www.youtube.com/watch?v=HagVnWAeGcM -o "/downloads/%(title)s-%(duration)s.%(ext)s"
-```
+    ```bash
+    docker-compose up -d
+    ```
 
-if you want to use a youtube-dl configuration file `youtube-dl.conf`, use:
+1. See the [youtube-dl command line options](https://github.com/rg3/youtube-dl/blob/master/README.md#options)
 
+## Extra features
 
-```bash
-docker run -d -v /yourpath:/downloads \
--v ./youtube-dl.conf:/etc/youtube-dl.conf:ro \
-qmcgaw/youtube-dl-alpine https://www.youtube.com/watch?v=HagVnWAeGcM
-```
+- The container checks for youtube-dl latest release and self-updates at launch
+- A log file of youtube-dl execution is saved at `downloads/log.txt` if the environment variable `LOG=yes`
+- A healthcheck is implemented which downloads `https://duckduckgo.com` with wget
 
+### Environment variables
 
-or use [docker-compose.yml](https://github.com/qdm12/youtube-dl-docker/blob/master/docker-compose.yml) with:
+| Environment variable | Default | Description |
+| --- | --- | --- |
+| `LOG` | `yes` | Writes youtube-dl output to `/downloads/log.txt` or not |
+| `AUTOUPDATE` | `yes` | Updates youtube-dl and other packages at launch or not |
 
+### Auto update Alpine packages
 
-```bash
-docker-compose up -d
-```
+Although unsecured, you can run the container with `--user=root` to auto update Alpine packages at start such as
 
-## Other
+- Python 2.7
+- FFMPEG
+- GNUPG
 
-- A healthcheck is implemented which only check DNS lookup of `duckduckgo.com` works
-- The container self-updates at start which is essential to have an up-to-date youtube-dl program
+### Downloads directory permission issues
+
+You can either:
+
+    - Change the ownership and permissions of `./downloads` on your host with:
+
+        ```sh
+        chown 1000 -R ./downloads
+        chmod 700 ./downloads
+        chmod -R 600 ./downloads/*
+        ```
+
+    - Launch the container with a different user using `--user=$UID:$GID`
 
 ## TODOs
 
-- Env variables
-- Colors in terminal
-- Regular automated builds
+- [ ] Healthcheck to check ydl logs
+- [ ] Regular automated builds
+- [ ] Colors in terminal
+- [ ] Notify when done
