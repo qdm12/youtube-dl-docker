@@ -90,7 +90,7 @@ if [ "$GPG_VERSION" != "$GPG_VERSION_BUILD" ]; then
 fi
 printf "\n\n"
 if [ "$LOG" = "yes" ]; then
-  youtube-dl "$@" | tee downloads/log.txt  
+  youtube-dl "$@" 2>&1 | tee downloads/log.txt  
 else
   youtube-dl "$@"
 fi
