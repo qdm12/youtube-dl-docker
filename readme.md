@@ -33,11 +33,12 @@ It is based on:
 
 ## Setup
 
-1. Create a directory `./downloads/` to store the downloads
 1. Run the container with
 
     ```bash
-    docker run -d -v ./downloads:/downloads qmcgaw/youtube-dl-alpine https://www.youtube.com/watch?v=HagVnWAeGcM
+    docker run -d -v $(pwd):/downloads qmcgaw/youtube-dl-alpine \
+    https://www.youtube.com/watch?v=HagVnWAeGcM \
+    -o "/downloads/%(title)s.%(ext)s"
     ```
 
     or use [docker-compose.yml](https://github.com/qdm12/youtube-dl-docker/blob/master/docker-compose.yml) with
