@@ -56,7 +56,7 @@ if [ "$AUTOUPDATE" = "yes" ]; then
   if [ "$YTDL_VERSION_BUILD" != "$YTDL_VERSION" ]; then
     wget -q https://github.com/rg3/youtube-dl/releases/download/$YTDL_VERSION/youtube-dl -O /usr/local/bin/youtube-dl
     wget -q https://github.com/rg3/youtube-dl/releases/download/$YTDL_VERSION/youtube-dl.sig -O /tmp/youtube-dl.sig
-    if [ gpg --verify /tmp/youtube-dl.sig /usr/local/bin/youtube-dl ]; then
+    if [ $(gpg --verify /tmp/youtube-dl.sig /usr/local/bin/youtube-dl) ]; then
       printf "error verifying youtube-dl signature!\n"
       exit 1
     fi
