@@ -20,16 +20,15 @@
 
 | Image size | RAM usage | CPU usage |
 | --- | --- | --- |
-| 100MB | Depends | Depends |
+| 92MB | Depends | Depends |
 
 It is based on:
 
 - [Alpine 3.8](https://alpinelinux.org)
 - [Youtube-dl](https://github.com/rg3/youtube-dl)
 - [ffmpeg 3.4.4](https://pkgs.alpinelinux.org/package/v3.8/community/x86_64/ffmpeg)
-- [Ca-Certificates](https://pkgs.alpinelinux.org/package/v3.8/main/x86_64/ca-certificates) for the initial check and healthcheck (through HTTPS)
+- [Ca-Certificates](https://pkgs.alpinelinux.org/package/v3.8/main/x86_64/ca-certificates)
 - [Python 2.7.15](https://pkgs.alpinelinux.org/package/v3.8/main/x86_64/python)
-- [GnuPG 2.2.8](https://pkgs.alpinelinux.org/package/v3.8/main/x86_64/gnupg)
 
 ## Setup
 
@@ -52,23 +51,15 @@ It is based on:
 ## Extra features
 
 - The container checks for youtube-dl latest release and self-updates at launch
-- A log file of youtube-dl execution is saved at `downloads/log.txt` if the environment variable `LOG=yes`
-- A healthcheck is implemented which downloads `https://duckduckgo.com` with wget
+- A log file of youtube-dl execution is saved at `downloads/log.txt` if the environment variable is `LOG=yes`
+- A healthcheck is implemented which downloads `https://duckduckgo.com` with wget every 10 minutes
+- The Docker Hub image is updated automatically every 3 days, so simply update your image with `docker pull qmcgaw\youtube-dl-alpine
 
 ### Environment variables
 
 | Environment variable | Default | Description |
 | --- | --- | --- |
 | `LOG` | `yes` | Writes youtube-dl output to `/downloads/log.txt` or not |
-| `AUTOUPDATE` | `yes` | Updates youtube-dl and other packages at launch or not |
-
-### Auto update Alpine packages
-
-Although unsecured, you can run the container with `--user=root` to auto update Alpine packages at start such as
-
-- Python 2.7
-- FFMPEG
-- GNUPG
 
 ### Downloads directory permission issues
 
@@ -87,6 +78,5 @@ You can either:
 ## TODOs
 
 - [ ] Healthcheck to check ydl logs
-- [ ] Regular automated builds
 - [ ] Colors in terminal
 - [ ] Notify when done

@@ -38,62 +38,18 @@ exitOnError(){
 }
 
 exitIfNotIn LOG "yes,no"
-exitIfNotIn AUTOUPDATE "yes,no"
 test -w "/downloads"
 exitOnError $? "/downloads is not writable, please fix its ownership and/or permissions"
-YTDL_VERSION_BUILD=$(youtube-dl --version)
-PYTHON_VERSION_BUILD=$(python --version 2>&1 | cut -d " " -f 2)
-FFMPEG_VERSION_BUILD=$(ffmpeg -version | head -n 1 | grep -oE 'version [0-9]+\.[0-9]+\.[0-9]+' | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
-GPG_VERSION_BUILD=$(gpg --version | head -n 1 | cut -d " " -f 3)
-if [ "$UID" = "0" ] && [ "$AUTOUPDATE" = "yes" ]; then
-  printf "Checking for Alpine packages updates..."
-  apk -q --no-cache --update upgrade
-  printf "DONE\n"
-fi
-if [ "$AUTOUPDATE" = "yes" ]; then
-  printf "Checking for Youtube-DL update..."
-  YTDL_VERSION=$(wget -qO- https://api.github.com/repos/rg3/youtube-dl/releases/latest | grep '"tag_name": ' | sed -E 's/.*"([^"]+)".*/\1/')
-  if [ "$YTDL_VERSION_BUILD" != "$YTDL_VERSION" ]; then
-    wget -q https://github.com/rg3/youtube-dl/releases/download/$YTDL_VERSION/youtube-dl -O /usr/local/bin/youtube-dl
-    wget -q https://github.com/rg3/youtube-dl/releases/download/$YTDL_VERSION/youtube-dl.sig -O /tmp/youtube-dl.sig
-    if [ $(gpg --verify /tmp/youtube-dl.sig /usr/local/bin/youtube-dl) ]; then
-      printf "error verifying youtube-dl signature!\n"
-      exit 1
-    fi
-    SHA256=$(wget -qO- https://github.com/rg3/youtube-dl/releases/download/$YTDL_VERSION/SHA2-256SUMS | head -n 1 | cut -d " " -f 1)
-    if [ $(sha256sum /usr/local/bin/youtube-dl | cut -d " " -f 1) != "$SHA256" ]; then
-      printf "error verifying youtube-dl checksum!\n"
-      exit 1
-    fi
-  fi
-  printf "DONE\n"
-fi
+youtube-dl -U
 YTDL_VERSION=$(youtube-dl --version)
 PYTHON_VERSION=$(python --version 2>&1 | cut -d " " -f 2)
 FFMPEG_VERSION=$(ffmpeg -version | head -n 1 | grep -oE 'version [0-9]+\.[0-9]+\.[0-9]+' | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
-GPG_VERSION=$(gpg --version | head -n 1 | cut -d " " -f 3)
 printf "Youtube-dl version: $YTDL_VERSION"
-if [ "$YTDL_VERSION" != "$YTDL_VERSION_BUILD" ]; then
-  printf " (updated from $YTDL_VERSION_BUILD)"
-fi
 printf "\nPython version: $PYTHON_VERSION"
-if [ "$PYTHON_VERSION" != "$PYTHON_VERSION_BUILD" ]; then
-  printf " (updated from $PYTHON_VERSION_BUILD)"
-fi
 printf "\nFFMPEG version: $FFMPEG_VERSION"
-if [ "$FFMPEG_VERSION" != "$FFMPEG_VERSION_BUILD" ]; then
-  printf " (updated from $FFMPEG_VERSION_BUILD)"
-fi
-printf "\nGPG version: $GPG_VERSION"
-if [ "$GPG_VERSION" != "$GPG_VERSION_BUILD" ]; then
-  printf " (updated from $GPG_VERSION_BUILD)"
-fi
 printf "\n\n"
-if [ "$LOG" = "yes" ]; then
-  youtube-dl "$@" 2>&1 | tee downloads/log.txt  
-else
-  youtube-dl "$@"
-fi
+[ "$LOG" = "no" ] || EXTRA_FLAG=2>&1 | tee downloads/log.txt
+youtube-dl "$@" $EXTRA_FLAG
 status=$?
 printf "\n =========================================\n"
 printf " Youtube-dl exit with status $status\n"
