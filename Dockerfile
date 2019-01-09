@@ -15,12 +15,13 @@ LABEL org.label-schema.schema-version="1.0.0-rc1" \
       org.label-schema.docker.cmd="docker run -d -v ./downloads:/downloads qmcgaw/youtube-dl-alpine https://www.youtube.com/watch?v=HagVnWAeGcM" \
       org.label-schema.docker.cmd.devel="docker run -it -v ./downloads:/downloads qmcgaw/youtube-dl-alpine https://www.youtube.com/watch?v=HagVnWAeGcM" \
       org.label-schema.docker.params="LOG=yes or no" \
-      image-size="92MB" \
+      image-size="93.8MB" \
       ram-usage="Variable" \
       cpu-usage="Variable"
 VOLUME /downloads
 HEALTHCHECK --interval=10m --timeout=10s --retries=1 CMD [ "$(wget -qO- https://duckduckgo.com 2>/dev/null)" != "" ] || exit 1
-ENV LOG=yes
+ENV LOG=yes \
+    AUTOUPDATE=no
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["-h"]
 COPY entrypoint.sh /

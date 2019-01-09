@@ -50,7 +50,7 @@ It is based on:
 
 ## Extra features
 
-- The container checks for youtube-dl latest release and self-updates at launch
+- The container updates youtube-dl at launch if the environment variable is `AUTOUPDATE=yes`
 - A log file of youtube-dl execution is saved at `downloads/log.txt` if the environment variable is `LOG=yes`
 - A healthcheck is implemented which downloads `https://duckduckgo.com` with wget every 10 minutes
 - The Docker Hub image is updated automatically every 3 days, so simply update your image with `docker pull qmcgaw\youtube-dl-alpine
@@ -60,6 +60,7 @@ It is based on:
 | Environment variable | Default | Description |
 | --- | --- | --- |
 | `LOG` | `yes` | Writes youtube-dl output to `/downloads/log.txt` or not |
+| `AUTOUPDATE` | `no` | Updates youtube-dl to the latest version at launch |
 
 ### Downloads directory permission issues
 
