@@ -3,7 +3,7 @@ ARG ALPINE_VERSION=3.8
 FROM alpine:${ALPINE_VERSION}
 ARG BUILD_DATE
 ARG VCS_REF
-ARG YOUTUBE_DL_OVERWRITE=2018.11.23
+ARG YOUTUBE_DL_OVERWRITE=
 LABEL org.label-schema.schema-version="1.0.0-rc1" \
       maintainer="quentin.mcgaw@gmail.com" \
       org.label-schema.build-date=$BUILD_DATE \
