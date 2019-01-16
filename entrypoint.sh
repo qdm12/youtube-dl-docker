@@ -49,8 +49,11 @@ printf "Youtube-dl version: $YTDL_VERSION"
 printf "\nPython version: $PYTHON_VERSION"
 printf "\nFFMPEG version: $FFMPEG_VERSION"
 printf "\n\n"
-[ "$LOG" = "no" ] || EXTRA_FLAG=2>&1 | tee downloads/log.txt
-youtube-dl "$@" $EXTRA_FLAG
+if [ "$LOG" = "yes" ]; then
+  youtube-dl "$@" 2>&1 | tee downloads/log.txt
+else
+  youtube-dl "$@"
+fi
 status=$?
 printf "\n =========================================\n"
 printf " Youtube-dl exit with status $status\n"
