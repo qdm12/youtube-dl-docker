@@ -1,4 +1,4 @@
-ARG ALPINE_VERSION=3.8
+ARG ALPINE_VERSION=3.9
 
 FROM alpine:${ALPINE_VERSION}
 ARG BUILD_DATE
@@ -15,7 +15,7 @@ LABEL org.label-schema.schema-version="1.0.0-rc1" \
       org.label-schema.docker.cmd="docker run -d -v ./downloads:/downloads qmcgaw/youtube-dl-alpine https://www.youtube.com/watch?v=HagVnWAeGcM" \
       org.label-schema.docker.cmd.devel="docker run -it -v ./downloads:/downloads qmcgaw/youtube-dl-alpine https://www.youtube.com/watch?v=HagVnWAeGcM" \
       org.label-schema.docker.params="LOG=yes or no" \
-      image-size="93.8MB" \
+      image-size="95.3MB" \
       ram-usage="Variable" \
       cpu-usage="Variable"
 VOLUME /downloads

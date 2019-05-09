@@ -4,7 +4,6 @@
 
 [![Docker Youtube-DL](https://github.com/qdm12/youtube-dl-docker/raw/master/title.png)](https://hub.docker.com/r/qmcgaw/youtube-dl-alpine/)
 
-[![Build Status](https://travis-ci.org/qdm12/youtube-dl-docker.svg?branch=master)](https://travis-ci.org/qdm12/youtube-dl-docker)
 [![Docker Build Status](https://img.shields.io/docker/build/qmcgaw/youtube-dl-alpine.svg)](https://hub.docker.com/r/qmcgaw/youtube-dl-alpine)
 
 [![GitHub last commit](https://img.shields.io/github/last-commit/qdm12/youtube-dl-docker.svg)](https://github.com/qdm12/youtube-dl-docker/issues)
@@ -22,15 +21,15 @@
 
 | Image size | RAM usage | CPU usage |
 | --- | --- | --- |
-| 92MB | Depends | Depends |
+| 95.3MB | Depends | Depends |
 
 It is based on:
 
-- [Alpine 3.8](https://alpinelinux.org)
+- [Alpine 3.9](https://alpinelinux.org)
 - [Youtube-dl](https://github.com/rg3/youtube-dl)
-- [ffmpeg 3.4.4](https://pkgs.alpinelinux.org/package/v3.8/community/x86_64/ffmpeg)
-- [Ca-Certificates](https://pkgs.alpinelinux.org/package/v3.8/main/x86_64/ca-certificates)
-- [Python 2.7.15](https://pkgs.alpinelinux.org/package/v3.8/main/x86_64/python)
+- [ffmpeg 3.4.4](https://pkgs.alpinelinux.org/package/v3.9/community/x86_64/ffmpeg)
+- [Ca-Certificates](https://pkgs.alpinelinux.org/package/v3.9/main/x86_64/ca-certificates)
+- [Python 2.7.15](https://pkgs.alpinelinux.org/package/v3.9/main/x86_64/python)
 
 ## Setup
 
