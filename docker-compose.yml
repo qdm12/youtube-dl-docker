@@ -1,7 +1,6 @@
 version: '3'
 services:
   youtube-dl:
-    build: .
     image: qmcgaw/youtube-dl-alpine
     container_name: youtube-dl
     network_mode: bridge
