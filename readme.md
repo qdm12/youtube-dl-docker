@@ -21,22 +21,50 @@
 
 | Image size | RAM usage | CPU usage |
 | --- | --- | --- |
-| 95.3MB | Depends | Depends |
+| 96.9MB | Depends | Depends |
 
 It is based on:
 
-- [Alpine 3.9](https://alpinelinux.org)
+- [Alpine 3.10](https://alpinelinux.org)
 - [Youtube-dl](https://github.com/rg3/youtube-dl)
-- [ffmpeg 3.4.4](https://pkgs.alpinelinux.org/package/v3.9/community/x86_64/ffmpeg)
-- [Ca-Certificates](https://pkgs.alpinelinux.org/package/v3.9/main/x86_64/ca-certificates)
-- [Python 2.7.15](https://pkgs.alpinelinux.org/package/v3.9/main/x86_64/python)
+- [ffmpeg 4.1.3](https://pkgs.alpinelinux.org/package/v3.10/community/x86_64/ffmpeg)
+- [Ca-Certificates](https://pkgs.alpinelinux.org/package/v3.10/main/x86_64/ca-certificates)
+- [Python 2.7.16](https://pkgs.alpinelinux.org/package/v3.10/main/x86_64/python)
 
 ## Setup
+
+1. <details><summary>CLICK IF YOU HAVE AN ARM DEVICE</summary><p>
+
+    - If you have a ARM 32 bit v6 architecture
+
+        ```sh
+        docker build -t qmcgaw/youtube-dl-alpine \
+        --build-arg BASE_IMAGE=arm32v6/alpine \
+        https://github.com/qdm12/youtube-dl-docker.git
+        ```
+
+    - If you have a ARM 32 bit v7 architecture
+
+        ```sh
+        docker build -t qmcgaw/youtube-dl-alpine \
+        --build-arg BASE_IMAGE=arm32v7/alpine \
+        https://github.com/qdm12/youtube-dl-docker.git
+        ```
+
+    - If you have a ARM 64 bit v8 architecture
+
+        ```sh
+        docker build -t qmcgaw/youtube-dl-alpine \
+        --build-arg BASE_IMAGE=arm64v8/alpine \
+        https://github.com/qdm12/youtube-dl-docker.git
+        ```
+
+    </p></details>
 
 1. Run the container with
 
     ```bash
-    docker run -d -v $(pwd):/downloads qmcgaw/youtube-dl-alpine \
+    docker run -d -v $(pwd)/yourdir:/downloads qmcgaw/youtube-dl-alpine \
     https://www.youtube.com/watch?v=HagVnWAeGcM \
     -o "/downloads/%(title)s.%(ext)s"
     ```
@@ -48,6 +76,8 @@ It is based on:
     ```
 
 1. See the [youtube-dl command line options](https://github.com/rg3/youtube-dl/blob/master/README.md#options)
+1. If you encounter permission issues, either `chown 1000 yourdir && chmod 700 yourdir` or run the container 
+with `--user=1001` where `1001` is the user ID owning *yourdir*
 
 ## Extra features
 

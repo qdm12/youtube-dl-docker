@@ -39,8 +39,6 @@ exitOnError(){
 
 exitIfNotIn LOG "yes,no"
 exitIfNotIn AUTOUPDATE "yes,no"
-test -w "/downloads"
-exitOnError $? "/downloads is not writable, please fix its ownership and/or permissions"
 [ "$AUTOUPDATE" = "no" ] || youtube-dl -U
 YTDL_VERSION=$(youtube-dl --version)
 PYTHON_VERSION=$(python --version 2>&1 | cut -d " " -f 2)
@@ -49,6 +47,8 @@ printf "Youtube-dl version: $YTDL_VERSION"
 printf "\nPython version: $PYTHON_VERSION"
 printf "\nFFMPEG version: $FFMPEG_VERSION"
 printf "\n\n"
+test -w "/downloads"
+exitOnError $? "/downloads is not writable, please fix its ownership and/or permissions"
 if [ "$LOG" = "yes" ]; then
   youtube-dl "$@" 2>&1 | tee downloads/log.txt
 else
