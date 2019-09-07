@@ -5,20 +5,19 @@ FROM ${BASE_IMAGE}:${ALPINE_VERSION}
 ARG BUILD_DATE
 ARG VCS_REF
 ARG YOUTUBE_DL_OVERWRITE=
-LABEL org.label-schema.schema-version="1.0.0-rc1" \
-      maintainer="quentin.mcgaw@gmail.com" \
-      org.label-schema.build-date=$BUILD_DATE \
-      org.label-schema.vcs-ref=$VCS_REF \
-      org.label-schema.vcs-url="https://github.com/qdm12/youtube-dl-docker" \
-      org.label-schema.url="https://github.com/qdm12/youtube-dl-docker" \
-      org.label-schema.vcs-description="Download with youtube-dl using command line arguments or configuration files" \
-      org.label-schema.vcs-usage="https://github.com/qdm12/youtube-dl-docker/blob/master/README.md#setup" \
-      org.label-schema.docker.cmd="docker run -d -v ./downloads:/downloads qmcgaw/youtube-dl-alpine https://www.youtube.com/watch?v=HagVnWAeGcM" \
-      org.label-schema.docker.cmd.devel="docker run -it -v ./downloads:/downloads qmcgaw/youtube-dl-alpine https://www.youtube.com/watch?v=HagVnWAeGcM" \
-      org.label-schema.docker.params="LOG=yes or no" \
-      image-size="95.3MB" \
-      ram-usage="Variable" \
-      cpu-usage="Variable"
+LABEL \
+    org.opencontainers.image.authors="quentin.mcgaw@gmail.com" \
+    org.opencontainers.image.created=$BUILD_DATE \
+    org.opencontainers.image.revision=$VCS_REF \
+    org.opencontainers.image.version="${YOUTUBE_DL_OVERWRITE}" \
+    org.opencontainers.image.url="https://github.com/qdm12/youtube-dl-docker" \
+    org.opencontainers.image.documentation="https://github.com/qdm12/youtube-dl-docker/blob/master/README.md" \
+    org.opencontainers.image.source="https://github.com/qdm12/youtube-dl-docker" \
+    org.opencontainers.image.title="youtube-dl-docker" \
+    org.opencontainers.image.description="Download with youtube-dl using command line arguments or configuration files" \
+    image-size="95.3MB" \
+    ram-usage="Variable" \
+    cpu-usage="Variable"
 VOLUME /downloads
 HEALTHCHECK --interval=10m --timeout=10s --retries=1 CMD [ "$(wget -qO- https://duckduckgo.com 2>/dev/null)" != "" ] || exit 1
 ENV LOG=yes \
