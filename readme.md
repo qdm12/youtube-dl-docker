@@ -21,13 +21,13 @@
 
 | Image size | RAM usage | CPU usage |
 | --- | --- | --- |
-| 96.9MB | Depends | Depends |
+| 97.7MB | Depends | Depends |
 
 It is based on:
 
 - [Alpine 3.10](https://alpinelinux.org)
 - [Youtube-dl](https://github.com/rg3/youtube-dl)
-- [ffmpeg 4.1.3](https://pkgs.alpinelinux.org/package/v3.10/community/x86_64/ffmpeg)
+- [ffmpeg 4.1.4](https://pkgs.alpinelinux.org/package/v3.10/community/x86_64/ffmpeg)
 - [Ca-Certificates](https://pkgs.alpinelinux.org/package/v3.10/main/x86_64/ca-certificates)
 - [Python 2.7.16](https://pkgs.alpinelinux.org/package/v3.10/main/x86_64/python)
 
@@ -76,7 +76,7 @@ It is based on:
     ```
 
 1. See the [youtube-dl command line options](https://github.com/rg3/youtube-dl/blob/master/README.md#options)
-1. If you encounter permission issues, either `chown 1000 yourdir && chmod 700 yourdir` or run the container 
+1. If you encounter permission issues, either `chown 1000 yourdir && chmod 700 yourdir` or run the container
 with `--user=1001` where `1001` is the user ID owning *yourdir*
 
 ## Extra features
@@ -85,6 +85,7 @@ with `--user=1001` where `1001` is the user ID owning *yourdir*
 - A log file of youtube-dl execution is saved at `downloads/log.txt` if the environment variable is `LOG=yes`
 - A healthcheck is implemented which downloads `https://duckduckgo.com` with wget every 10 minutes
 - The Docker Hub image is updated automatically every 3 days, so simply update your image with `docker pull qmcgaw\youtube-dl-alpine
+- You can receive a notification on your Android device through Gotify when the container has finished
 
 ### Environment variables
 
@@ -92,6 +93,8 @@ with `--user=1001` where `1001` is the user ID owning *yourdir*
 | --- | --- | --- |
 | `LOG` | `yes` | Writes youtube-dl output to `/downloads/log.txt` or not |
 | `AUTOUPDATE` | `no` | Updates youtube-dl to the latest version at launch |
+| `GOTIFYURL` |  | Gotify server URL address (i.e. `http://192.168.1.5:8000` or `https://a.com/gotify`) |
+| `GOTIFYTOKEN` |  | Gotify server Token |
 
 ### Downloads directory permission issues
 
@@ -111,4 +114,3 @@ You can either:
 
 - [ ] Healthcheck to check ydl logs
 - [ ] Colors in terminal
-- [ ] Notify when done

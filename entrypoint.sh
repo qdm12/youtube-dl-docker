@@ -37,6 +37,12 @@ exitOnError(){
   fi
 }
 
+if [ ! -z "$GOTIFYURL" ]; then
+  wget -qO- "$GOTIFYURL/version" &> /dev/null
+  if [ $? != 0 ]; then
+    printf "WARNING: Cannot communicate with Gotify server ($?)\n"
+  fi
+fi
 exitIfNotIn LOG "yes,no"
 exitIfNotIn AUTOUPDATE "yes,no"
 [ "$AUTOUPDATE" = "no" ] || youtube-dl -U
@@ -55,6 +61,13 @@ else
   youtube-dl "$@"
 fi
 status=$?
+if [ ! -z "$GOTIFYURL" ]; then
+  curl -X POST "$GOTIFYURL/message" \
+  -H "X-Gotify-Key: $GOTIFYTOKEN" \
+  -H "accept: application/json" \
+  -H "Content-Type: application/json" \
+  -d "{ \"message\": \"Youtube-DL `hostname` finished ($status)\", \"priority\": 1, \"title\": \"Youtube-DL\"}" &> /dev/null
+fi
 printf "\n =========================================\n"
 printf " Youtube-dl exit with status $status\n"
 printf " =========================================\n"
