@@ -23,13 +23,21 @@
 | --- | --- | --- |
 | 97.7MB | Depends | Depends |
 
-It is based on:
+# Features
 
-- [Alpine 3.10](https://alpinelinux.org)
-- [Youtube-dl](https://github.com/rg3/youtube-dl)
-- [ffmpeg 4.1.4](https://pkgs.alpinelinux.org/package/v3.10/community/x86_64/ffmpeg)
-- [Ca-Certificates](https://pkgs.alpinelinux.org/package/v3.10/main/x86_64/ca-certificates)
-- [Python 2.7.16](https://pkgs.alpinelinux.org/package/v3.10/main/x86_64/python)
+- Works with command line arguments to *youtube-dl*
+- Compatible with ARM ([build it yourself](#Setup))
+- Small Docker image based on
+    - [Alpine 3.10](https://alpinelinux.org)
+    - [Youtube-dl](https://github.com/rg3/youtube-dl)
+    - [ffmpeg 4.1.4](https://pkgs.alpinelinux.org/package/v3.10/community/x86_64/ffmpeg)
+    - [Ca-Certificates](https://pkgs.alpinelinux.org/package/v3.10/main/x86_64/ca-certificates)
+    - [Python 2.7.16](https://pkgs.alpinelinux.org/package/v3.10/main/x86_64/python)
+- The container updates youtube-dl at launch if `-e AUTOUPDATE=yes`
+- A log file of youtube-dl execution is saved at `downloads/log.txt` if `-e LOG=yes`
+- Docker healthcheck downloading `https://duckduckgo.com` with `wget` every 10 minutes
+- The Docker Hub image is updated automatically every 3 days, so simply update your image with `docker pull qmcgaw\youtube-dl-alpine`
+- You can receive a notification on your Android device through Gotify when the *youtube-dl* has finished
 
 ## Setup
 
@@ -79,14 +87,6 @@ It is based on:
 1. If you encounter permission issues, either `chown 1000 yourdir && chmod 700 yourdir` or run the container
 with `--user=1001` where `1001` is the user ID owning *yourdir*
 
-## Extra features
-
-- The container updates youtube-dl at launch if the environment variable is `AUTOUPDATE=yes`
-- A log file of youtube-dl execution is saved at `downloads/log.txt` if the environment variable is `LOG=yes`
-- A healthcheck is implemented which downloads `https://duckduckgo.com` with wget every 10 minutes
-- The Docker Hub image is updated automatically every 3 days, so simply update your image with `docker pull qmcgaw\youtube-dl-alpine
-- You can receive a notification on your Android device through Gotify when the container has finished
-
 ### Environment variables
 
 | Environment variable | Default | Description |
@@ -100,15 +100,15 @@ with `--user=1001` where `1001` is the user ID owning *yourdir*
 
 You can either:
 
-    - Change the ownership and permissions of `./downloads` on your host with:
+- Change the ownership and permissions of `./downloads` on your host with:
 
-        ```sh
-        chown 1000 -R ./downloads
-        chmod 700 ./downloads
-        chmod -R 600 ./downloads/*
-        ```
+    ```sh
+    chown 1000 -R ./downloads
+    chmod 700 ./downloads
+    chmod -R 600 ./downloads/*
+    ```
 
-    - Launch the container with a different user using `--user=$UID:$GID`
+- Launch the container with a different user using `--user=$UID:$GID`
 
 ## TODOs
 
