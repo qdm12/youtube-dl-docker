@@ -1,4 +1,4 @@
-ARG ALPINE_VERSION=3.10
+ARG ALPINE_VERSION=3.12
 
 FROM alpine:${ALPINE_VERSION}
 ARG BUILD_DATE
@@ -13,10 +13,7 @@ LABEL \
     org.opencontainers.image.documentation="https://github.com/qdm12/youtube-dl-docker/blob/master/README.md" \
     org.opencontainers.image.source="https://github.com/qdm12/youtube-dl-docker" \
     org.opencontainers.image.title="youtube-dl-docker" \
-    org.opencontainers.image.description="Download with youtube-dl using command line arguments or configuration files" \
-    image-size="97.7MB" \
-    ram-usage="Variable" \
-    cpu-usage="Variable"
+    org.opencontainers.image.description="Download with youtube-dl using command line arguments or configuration files"
 HEALTHCHECK --interval=10m --timeout=10s --retries=1 CMD [ "$(wget -qO- https://duckduckgo.com 2>/dev/null)" != "" ] || exit 1
 ENV LOG=yes \
     AUTOUPDATE=no \
@@ -25,7 +22,8 @@ ENV LOG=yes \
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["-h"]
 COPY entrypoint.sh /
-RUN apk add -q --progress --update --no-cache ca-certificates wget ffmpeg python gnupg curl && \
+RUN apk add -q --progress --update --no-cache ca-certificates wget ffmpeg python3 gnupg curl && \
+    ln -s /usr/bin/python3 /usr/local/bin/python && \
     LATEST=$(wget -qO- https://api.github.com/repos/rg3/youtube-dl/releases/latest | grep '"tag_name": ' | sed -E 's/.*"([^"]+)".*/\1/') && \
     LATEST=${YOUTUBE_DL_OVERWRITE:-$LATEST} && \
     wget -q https://github.com/rg3/youtube-dl/releases/download/$LATEST/youtube-dl -O /usr/local/bin/youtube-dl && \
