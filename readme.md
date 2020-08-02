@@ -4,29 +4,23 @@
 
 [![Docker Youtube-DL](https://github.com/qdm12/youtube-dl-docker/raw/master/title.png)](https://hub.docker.com/r/qmcgaw/youtube-dl-alpine/)
 
-[![Docker Build Status](https://img.shields.io/docker/build/qmcgaw/youtube-dl-alpine.svg)](https://hub.docker.com/r/qmcgaw/youtube-dl-alpine)
+[![Build status](https://github.com/qdm12/ddns-updater/workflows/Buildx%20latest/badge.svg)](https://github.com/qdm12/ddns-updater/actions?query=workflow%3A%22Buildx+latest%22)
+[![Docker Pulls](https://img.shields.io/docker/pulls/qmcgaw/youtube-dl-alpine.svg)](https://hub.docker.com/r/qmcgaw/youtube-dl-alpine)
+[![Docker Stars](https://img.shields.io/docker/stars/qmcgaw/youtube-dl-alpine.svg)](https://hub.docker.com/r/qmcgaw/youtube-dl-alpine)
+[![Docker Automated](https://img.shields.io/docker/automated/qmcgaw/youtube-dl-alpine.svg)](https://hub.docker.com/r/qmcgaw/youtube-dl-alpine)
+[![Image size](https://images.microbadger.com/badges/image/qmcgaw/youtube-dl-alpine.svg)](https://microbadger.com/images/qmcgaw/youtube-dl-alpine)
+[![Image version](https://images.microbadger.com/badges/version/qmcgaw/youtube-dl-alpine.svg)](https://microbadger.com/images/qmcgaw/youtube-dl-alpine)
 
 [![GitHub last commit](https://img.shields.io/github/last-commit/qdm12/youtube-dl-docker.svg)](https://github.com/qdm12/youtube-dl-docker/issues)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/qdm12/youtube-dl-docker.svg)](https://github.com/qdm12/youtube-dl-docker/issues)
 [![GitHub issues](https://img.shields.io/github/issues/qdm12/youtube-dl-docker.svg)](https://github.com/qdm12/youtube-dl-docker/issues)
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/qmcgaw/youtube-dl-alpine.svg)](https://hub.docker.com/r/qmcgaw/youtube-dl-alpine)
-[![Docker Stars](https://img.shields.io/docker/stars/qmcgaw/youtube-dl-alpine.svg)](https://hub.docker.com/r/qmcgaw/youtube-dl-alpine)
-[![Docker Automated](https://img.shields.io/docker/automated/qmcgaw/youtube-dl-alpine.svg)](https://hub.docker.com/r/qmcgaw/youtube-dl-alpine)
+[![Donate PayPal](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/qmcgaw)
 
-[![Image size](https://images.microbadger.com/badges/image/qmcgaw/youtube-dl-alpine.svg)](https://microbadger.com/images/qmcgaw/youtube-dl-alpine)
-[![Image version](https://images.microbadger.com/badges/version/qmcgaw/youtube-dl-alpine.svg)](https://microbadger.com/images/qmcgaw/youtube-dl-alpine)
-
-[![Donate PayPal](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/qdm12)
-
-| Image size | RAM usage | CPU usage |
-| --- | --- | --- |
-| 97.7MB | Depends | Depends |
-
-# Features
+## Features
 
 - Works with command line arguments to *youtube-dl*
-- Compatible with ARM ([build it yourself](#Setup))
+- Compatible with AMD64, 386, ARM v6/v7/v8 CPU architectures
 - Small Docker image based on
     - [Alpine 3.10](https://alpinelinux.org)
     - [Youtube-dl](https://github.com/rg3/youtube-dl)
@@ -40,34 +34,6 @@
 - You can receive a notification on your Android device through Gotify when the *youtube-dl* has finished
 
 ## Setup
-
-1. <details><summary>CLICK IF YOU HAVE AN ARM DEVICE</summary><p>
-
-    - If you have a ARM 32 bit v6 architecture
-
-        ```sh
-        docker build -t qmcgaw/youtube-dl-alpine \
-        --build-arg BASE_IMAGE=arm32v6/alpine \
-        https://github.com/qdm12/youtube-dl-docker.git
-        ```
-
-    - If you have a ARM 32 bit v7 architecture
-
-        ```sh
-        docker build -t qmcgaw/youtube-dl-alpine \
-        --build-arg BASE_IMAGE=arm32v7/alpine \
-        https://github.com/qdm12/youtube-dl-docker.git
-        ```
-
-    - If you have a ARM 64 bit v8 architecture
-
-        ```sh
-        docker build -t qmcgaw/youtube-dl-alpine \
-        --build-arg BASE_IMAGE=arm64v8/alpine \
-        https://github.com/qdm12/youtube-dl-docker.git
-        ```
-
-    </p></details>
 
 1. Run the container with
 
