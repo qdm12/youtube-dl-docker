@@ -36,6 +36,6 @@ RUN apk add -q --progress --update --no-cache --virtual deps wget gnupg && \
     apk del deps && \
     rm -rf /var/cache/apk/* /tmp/youtube-dl.sig && \
     chown 1000 /entrypoint.sh /usr/local/bin/youtube-dl && \
-    chmod 500 /entrypoint.sh && \
-    chmod 700 /usr/local/bin/youtube-dl
+    chmod 555 /entrypoint.sh && \
+    chmod 777 /usr/local/bin/youtube-dl
 USER 1000

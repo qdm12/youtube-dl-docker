@@ -49,8 +49,15 @@
     ```
 
 1. See the [youtube-dl command line options](https://github.com/rg3/youtube-dl/blob/master/README.md#options)
-1. If you encounter permission issues, either `chown 1000 yourdir && chmod 700 yourdir` or run the container
-with `--user=root` so it will have permission to access `yourdir`.
+1. By default the container runs as user ID `1000` in order to not run as `root`.
+If you encounter permission issues with your bind mounted `yourdir` directory, either:
+    - Change the ownership and permission of your directory to match user id `1000`:
+
+        ```sh
+        chown 1000 yourdir && chmod 700 yourdir
+        ```
+
+    - Run the container with the user ID owning `yourdir`, for example with the Docker flag `--user=1030`.
 
 ### Environment variables
 
