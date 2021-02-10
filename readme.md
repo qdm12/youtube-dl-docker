@@ -30,7 +30,6 @@
 - The container updates youtube-dl at launch if `-e AUTOUPDATE=yes`
 - A log file of youtube-dl execution is saved at `downloads/log.txt` if `-e LOG=yes`
 - Docker healthcheck downloading `https://duckduckgo.com` with `wget` every 10 minutes
-- The Docker Hub image is updated automatically every 3 days, so simply update your image with `docker pull qmcgaw\youtube-dl-alpine`
 - You can receive a notification on your Android device through Gotify when the *youtube-dl* has finished
 
 ## Setup
@@ -51,7 +50,7 @@
 
 1. See the [youtube-dl command line options](https://github.com/rg3/youtube-dl/blob/master/README.md#options)
 1. If you encounter permission issues, either `chown 1000 yourdir && chmod 700 yourdir` or run the container
-with `--user=1001` where `1001` is the user ID owning *yourdir*
+with `--user=root` so it will have permission to access `yourdir`.
 
 ### Environment variables
 
@@ -74,7 +73,7 @@ You can either:
     chmod -R 600 ./downloads/*
     ```
 
-- Launch the container with a different user using `--user=$UID:$GID`
+- Launch the container as `root` user using `--user=root`
 
 ## TODOs
 
