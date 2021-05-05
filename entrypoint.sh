@@ -59,11 +59,12 @@ fi
 youtube-dl "$@"
 status=$?
 if [ ! -z "$GOTIFYURL" ]; then
-  curl -X POST "$GOTIFYURL/message" \
-  -H "X-Gotify-Key: $GOTIFYTOKEN" \
-  -H "accept: application/json" \
-  -H "Content-Type: application/json" \
-  -d "{ \"message\": \"Youtube-DL `hostname` finished ($status)\", \"priority\": 1, \"title\": \"Youtube-DL\"}" &> /dev/null
+  wget \
+  --header="X-Gotify-Key: $GOTIFYTOKEN" \
+  --header "accept: application/json" \
+  --header "Content-Type: application/json" \
+  --post-data "{ \"message\": \"Youtube-DL `hostname` finished ($status)\", \"priority\": 1, \"title\": \"Youtube-DL\"}" \
+  "$GOTIFYURL/message" &> /dev/null
 fi
 printf "\n =========================================\n"
 printf " Youtube-dl exit with status $status\n"
