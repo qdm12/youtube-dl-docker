@@ -28,7 +28,6 @@
     - [Ca-Certificates](https://pkgs.alpinelinux.org/package/v3.10/main/x86_64/ca-certificates)
     - [Python 3.8.5](https://pkgs.alpinelinux.org/package/v3.10/main/x86_64/python)
 - The container updates youtube-dl at launch if `-e AUTOUPDATE=yes`
-- A log file of youtube-dl execution is saved at `downloads/log.txt` if `-e LOG=yes`
 - Docker healthcheck downloading `https://duckduckgo.com` with `wget` every 10 minutes
 - You can receive a notification on your Android device through Gotify when the *youtube-dl* has finished
 
@@ -63,7 +62,6 @@ If you encounter permission issues with your bind mounted `yourdir` directory, e
 
 | Environment variable | Default | Description |
 | --- | --- | --- |
-| `LOG` | `yes` | Writes youtube-dl output to `/downloads/log.txt` or not |
 | `AUTOUPDATE` | `no` | Updates youtube-dl to the latest version at launch |
 | `GOTIFYURL` |  | Gotify server URL address (i.e. `http://192.168.1.5:8000` or `https://a.com/gotify`) |
 | `GOTIFYTOKEN` |  | Gotify server Token |

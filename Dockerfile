@@ -15,8 +15,7 @@ LABEL \
     org.opencontainers.image.title="youtube-dl-docker" \
     org.opencontainers.image.description="Download with youtube-dl using command line arguments or configuration files"
 HEALTHCHECK --interval=10m --timeout=10s --retries=1 CMD [ "$(wget -qO- https://duckduckgo.com 2>/dev/null)" != "" ] || exit 1
-ENV LOG=yes \
-    AUTOUPDATE=no \
+ENV AUTOUPDATE=no \
     GOTIFYURL= \
     GOTIFYTOKEN=
 ENTRYPOINT ["/entrypoint.sh"]

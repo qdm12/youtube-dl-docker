@@ -43,7 +43,6 @@ if [ ! -z "$GOTIFYURL" ]; then
     printf "WARNING: Cannot communicate with Gotify server ($?)\n"
   fi
 fi
-exitIfNotIn LOG "yes,no"
 exitIfNotIn AUTOUPDATE "yes,no"
 [ "$AUTOUPDATE" = "no" ] || youtube-dl -U
 YTDL_VERSION=$(youtube-dl --version)
@@ -55,11 +54,7 @@ printf "\nFFMPEG version: $FFMPEG_VERSION"
 printf "\n\n"
 test -w "/downloads"
 exitOnError $? "/downloads is not writable, please fix its ownership and/or permissions"
-if [ "$LOG" = "yes" ]; then
-  youtube-dl "$@" 2>&1 | tee downloads/log.txt
-else
-  youtube-dl "$@"
-fi
+youtube-dl "$@"
 status=$?
 if [ ! -z "$GOTIFYURL" ]; then
   curl -X POST "$GOTIFYURL/message" \
