@@ -82,6 +82,19 @@ You can either:
 
 - Launch the container as `root` user using `--user=root`
 
+### Authenticate with Netrc file
+
+To authenticate you can bind mount a [`.netrc` file](https://github.com/ytdl-org/youtube-dl/blob/master/README.md#authentication-with-netrc-file).
+
+You should, on your host, set the right ownership and permissions as follow:
+
+```sh
+chown 1000:1000 .netrc
+chmod 600 .netrc
+```
+
+And then bind mount it with `-v "$(pwd)/.netrc:/.netrc:ro"` and youtube-dl will pick it up.
+
 ## TODOs
 
 - [ ] Healthcheck to check ydl logs
