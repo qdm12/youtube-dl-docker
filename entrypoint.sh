@@ -53,7 +53,9 @@ printf "\nPython version: $PYTHON_VERSION"
 printf "\nFFMPEG version: $FFMPEG_VERSION"
 printf "\n\n"
 test -w "/downloads"
-exitOnError $? "/downloads is not writable, please fix its ownership and/or permissions"
+if [ $? != 0 ]; then
+  echo "WARNING: /downloads is not writable, you might want to fix its ownership and/or permissions"
+fi
 youtube-dl "$@"
 status=$?
 if [ ! -z "$GOTIFYURL" ]; then
