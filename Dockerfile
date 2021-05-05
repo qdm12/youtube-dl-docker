@@ -24,7 +24,7 @@ CMD ["-h"]
 COPY entrypoint.sh /
 RUN apk add -q --progress --update --no-cache ca-certificates ffmpeg python3 && \
     rm -rf /var/cache/apk/*
-RUN apk add -q --progress --update --no-cache --virtual deps wget gnupg && \
+RUN apk add -q --progress --update --no-cache --virtual deps gnupg && \
     ln -s /usr/bin/python3 /usr/local/bin/python && \
     LATEST=${YOUTUBE_DL_OVERWRITE:-latest} && \
     wget -q https://yt-dl.org/downloads/$LATEST/youtube-dl -O /usr/local/bin/youtube-dl && \
