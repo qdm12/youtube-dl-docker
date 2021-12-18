@@ -34,4 +34,3 @@ jobs:
             -t qmcgaw/youtube-dl-alpine \
             --push \
             .
-      - run: curl -X POST https://hooks.microbadger.com/images/qmcgaw/youtube-dl-alpine/250AkcgGBWzkhav_KweCKV2NYu4= || exit 0
