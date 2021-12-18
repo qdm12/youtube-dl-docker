@@ -20,11 +20,11 @@
 - Works with command line arguments to *youtube-dl*
 - Compatible with AMD64, 386, ARM v6/v7/v8 CPU architectures
 - Small Docker image based on
-    - [Alpine 3.13](https://alpinelinux.org)
+    - [Alpine 3.15](https://alpinelinux.org)
     - [Youtube-dl](https://github.com/rg3/youtube-dl)
-    - [ffmpeg 4.3.1](https://pkgs.alpinelinux.org/package/v3.10/community/x86_64/ffmpeg)
-    - [Ca-Certificates](https://pkgs.alpinelinux.org/package/v3.10/main/x86_64/ca-certificates)
-    - [Python 3.8.8](https://pkgs.alpinelinux.org/package/v3.10/main/x86_64/python)
+    - [ffmpeg 4.4.1](https://pkgs.alpinelinux.org/package/v3.15/community/x86_64/ffmpeg)
+    - [Ca-Certificates](https://pkgs.alpinelinux.org/package/v3.15/main/x86_64/ca-certificates)
+    - [Python 3.9.7](https://pkgs.alpinelinux.org/package/v3.15/main/x86_64/python)
 - The container updates youtube-dl at launch if `-e AUTOUPDATE=yes`
 - Docker healthcheck downloading `https://duckduckgo.com` with `wget` every 10 minutes
 - You can receive a notification on your Android device through Gotify when the *youtube-dl* has finished
