@@ -47,7 +47,7 @@ exitIfNotIn AUTOUPDATE "yes,no"
 [ "$AUTOUPDATE" = "no" ] || youtube-dl -U
 YTDL_VERSION=$(youtube-dl --version)
 PYTHON_VERSION=$(python3 --version 2>&1 | cut -d " " -f 2)
-FFMPEG_VERSION=$(ffmpeg -version | head -n 1 | grep -oE 'version [0-9]+\.[0-9]+\.[0-9]+' | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
+FFMPEG_VERSION=$(ffmpeg -version | head -n 1 | grep -oE 'version [0-9]+\.[0-9]+(\.[0-9]+){0,1}' | grep -oE '[0-9]+\.[0-9]+(\.[0-9]+){0,1}')
 printf "Youtube-dl version: $YTDL_VERSION"
 printf "\nPython version: $PYTHON_VERSION"
 printf "\nFFMPEG version: $FFMPEG_VERSION"
