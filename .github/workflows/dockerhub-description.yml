@@ -1,19 +1,25 @@
 name: Docker Hub description
 on:
   push:
-    branches: [master]
+    branches:
+      - master
     paths:
-      - README.md
+      - readme.md
       - .github/workflows/dockerhub-description.yml
 jobs:
-  dockerHubDescription:
+  docker-hub-description:
+    if: github.repository == 'qdm12/youtube-dl-docker'
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Docker Hub Description
-        uses: peter-evans/dockerhub-description@v2.1.0
-        env:
-          DOCKERHUB_USERNAME: qmcgaw
-          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-          DOCKERHUB_REPOSITORY: qmcgaw/youtube-dl-alpine
+      - uses: actions/checkout@v3
+
+      - uses: peter-evans/dockerhub-description@v3
+        with:
+          username: qmcgaw
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: qmcgaw/youtube-dl-alpine
+          short-description: Youtube-dl in an Alpine container
+          readme-filepath: readme.md
