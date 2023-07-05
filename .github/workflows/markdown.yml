@@ -16,7 +16,24 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - uses: DavidAnson/markdownlint-cli2-action@v11
+        with:
+          globs: "**.md"
+          config: .markdownlint.json
+
+      - uses: reviewdog/action-misspell@v1
+        with:
+          locale: "US"
+          level: error
+          pattern: |
+            *.md
+
+      - uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          use-quiet-mode: yes
+
       - uses: peter-evans/dockerhub-description@v3
+        if: github.repository == 'qdm12/youtube-dl-docker'
         with:
           username: qmcgaw
           password: ${{ secrets.DOCKERHUB_PASSWORD }}

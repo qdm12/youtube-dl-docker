@@ -24,7 +24,7 @@
   - [Youtube-dl](https://github.com/yt-dlp/yt-dlp)
   - [ffmpeg 6.0](https://pkgs.alpinelinux.org/package/v3.18/community/x86_64/ffmpeg)
   - [Ca-Certificates](https://pkgs.alpinelinux.org/package/v3.18/main/x86_64/ca-certificates)
-  - [Python 3.11.4](https://pkgs.alpinelinux.org/package/v3.18/main/x86_64/python)
+  - [Python 3.11.4](https://pkgs.alpinelinux.org/package/v3.18/main/x86_64/python3)
 - The container updates youtube-dl at launch if `-e AUTOUPDATE=yes`
 - Docker healthcheck downloading `https://duckduckgo.com` with `wget` every 10 minutes
 - You can receive a notification on your Android device through Gotify when the *youtube-dl* has finished
